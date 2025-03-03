@@ -282,7 +282,7 @@
 
     }
     let update = function () {
-
+        $(document).off("keydown");
 
         $.ajax({
             url: "${pageContext.request.contextPath}/gold/update",
@@ -345,6 +345,12 @@
         $(lst[6]).css("color", "red")
         $(lst[6]).off("click")
         $(lst[6]).click(update)
+        $(document).on("keydown", function (event) {
+            if (event.key === "Enter") {
+                $(lst[6]).click(); // 触发按钮点击
+            }
+        });
+
         // $("#commentupd").attr("disabled", "disabled")
 
     }
@@ -455,6 +461,12 @@
                         if (i === b - 1) {
                             attr.type = 'button';
                             attr.value = "提交"
+                            let a = attr;
+                            $(document).on("keydown", function (event) {
+                                if (event.key === "Enter") {
+                                    $(a).click(); // 触发按钮点击
+                                }
+                            });
                             attr.onclick = function () {
 
                                 addsubmit(this)
@@ -478,6 +490,7 @@
 
                 }
                 let addsubmit = function (a) {
+                    $(document).off("keydown");
                     /*副表*/
                     if ($("#zhichucheck").prop("checked") && !($("#priceB").val().startsWith("-"))) {
                         let a = $("#priceB").val()

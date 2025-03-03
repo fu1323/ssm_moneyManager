@@ -22,7 +22,15 @@
     </div>
     <script type="text/javascript">
         $(function () {
-            $("#btnSubmit").click(function () {
+            let a = $("#btnSubmit");
+            $(document).on("keydown", function (event) {
+                if (event.key === "Enter") {
+                    $(a).click(); // 触发按钮点击
+                }
+            });
+
+
+            a.click(function () {
                 if(($("#txtUserName").val().length > 1)&&(($("#txtPassword").val().length > 1))){
 
 

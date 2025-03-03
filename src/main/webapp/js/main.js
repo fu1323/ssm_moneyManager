@@ -1,5 +1,3 @@
-
-
 let reload = function (reload) {
     if (main) {
         $.ajax({
@@ -25,11 +23,11 @@ let dom = function (b) {
         fu(a)
     })
     if (!main) {
-        $("#titled").text(month+"月份收支统计副表")
+        $("#titled").text(month + "月份收支统计副表")
         $("#create").show()
         $("#monetPX").show()
     } else {
-        $("#titled").text(month+"月份收支统计主表")
+        $("#titled").text(month + "月份收支统计主表")
         $("#create").hide()
         $("#monetPX").hide()
     }
@@ -229,7 +227,7 @@ let tuodongview = function (a) {
         $("#yu_e").text(parseInt(a.allMoney) - parseInt(a.allKaizhi) - parseInt(a.first))
         if (parseFloat($("#yu_e").text()) < 0) {
             $("#yu_e").css("background", "red")
-        }else $("#yu_e").css("background", "yellow")
+        } else $("#yu_e").css("background", "yellow")
     } else {
         $("#tuodongid").text("-8")
         $("#kezhipei").text("0")
@@ -399,229 +397,237 @@ let set = function (a) {
         reload()
     }
 }
-let adder = function (a) {
-    $("#fu").off()
+// let adder = function (a) {
+//     $("#fu").off()
+//
+//     // a.disabled = true
+//     $("#trbtn").hide()
+//     var attr1 = document.createElement("tr");
+//     attr1.className = "add4btn"
+//     let b = a.parentNode.colSpan;
+//     for (let i = 0; i < b; i++) {
+//         // alert(i)
+//         var htmlTableCellElement = document.createElement("td");
+//         var attr = document.createElement("input");
+//
+//         if (main) {
+//
+//             switch (i) {
+//                 case 1: {
+//                     attr.type = 'text';
+//
+//                     attr.id = "price";
+//                     break;
+//                 }
+//                 case 0: {
+//                     attr.type = 'text';
+//
+//                     attr.hidden = true;
+//                     break;
+//                 }
+//                 case 2: {
+//                     attr.type = 'date';
+//                     attr.name = 'date';
+//                     attr.id = "dateadd"
+//                     break;
+//                 }
+//                 case 3: {
+//                     attr.type = 'text';
+//                     attr.hidden = true;
+//                     attr.id = "commentadd"
+//
+//                     break;
+//                 }
+//
+//             }
+//
+//
+//         } else {
+//
+//
+//             switch (i) {
+//                 case 1: {
+//                     attr.type = 'text';
+//                     attr.id = "nameB";
+//                     break;
+//                 }
+//                 case 0: {
+//                     attr.type = 'text';
+//
+//                     attr.hidden = true;
+//                     break;
+//                 }
+//                 case 3: {
+//                     attr.type = 'date';
+//                     attr.name = 'date';
+//                     attr.id = 'dateB';
+//                     break;
+//                 }
+//                 case 2: {
+//                     attr.type = 'text';
+//
+//                     attr.id = "priceB"
+//                     break;
+//                 }
+//                 case 5: {
+//                     attr.type = 'date';
+//                     attr.name = 'countTo';
+//                     attr.id = 'countToB';
+//                     break;
+//                 }
+//                 case 4: {
+//                     attr.type = 'text';
+//
+//                     // attr.type = 'date';
+//                     attr.name = 'comment';
+//                     attr.id = 'commentB';
+//                     break;
+//
+//                 }
+//
+//             }
+//
+//         }
+//
+//         if (i === b - 1) {
+//             attr.type = 'button';
+//             attr.value = "提交"
+//             let a = attr;
+//             $(document).on("keydown", function (event) {
+//                 if (event.key === "Enter") {
+//                     $(a).click(); // 触发按钮点击
+//                 }
+//             });
+//
+//             attr.onclick = function () {
+//                 $(a).off("keydown");
+//                 addsubmit(this)
+//
+//             }
+//         }
+//
+//
+//         htmlTableCellElement.appendChild(attr);
+//         attr1.appendChild(htmlTableCellElement)
+//
+//     }
+//     $("#tbd").append(attr1);
+//     if (!main) {
+//         var htmlInputElement01 = document.createElement("span");
+//         htmlInputElement01.innerHTML = "快捷备注:"
+//
+//         var htmlInputElement0 = document.createElement("input");
+//         htmlInputElement0.type = 'button'
+//         htmlInputElement0.value = "买菜"
+//         fastbtn($(htmlInputElement0))
+//         htmlInputElement0.style.background = "green"
+//
+//
+//         var htmlInputElement1 = document.createElement("input");
+//         htmlInputElement1.type = 'button'
+//         htmlInputElement1.value = "超市购物"
+//         htmlInputElement1.style.background = "orange"
+//         fastbtn($(htmlInputElement1))
+//         var htmlInputElement2 = document.createElement("input");
+//         htmlInputElement2.type = 'button'
+//         htmlInputElement2.value = "羊毛"
+//         htmlInputElement2.style.background = "pink"
+//         fastbtn($(htmlInputElement2))
+//         var htmlInputElement3 = document.createElement("input");
+//         htmlInputElement3.type = 'checkbox'
+//         htmlInputElement3.name = "shouru"
+//         htmlInputElement3.id = "shouru"
+//         var htmlInputElement42 = document.createElement("br");
+//         var htmlInputElement4 = document.createElement("span");
+//         htmlInputElement4.innerHTML = "计做收入"
+//
+//
+//         var htmlTableRowElement = document.createElement("tr");
+//         var htmlTableCellElement1 = document.createElement("td");
+//         htmlTableCellElement1.appendChild(htmlInputElement3)
+//
+//         htmlTableCellElement1.appendChild(htmlInputElement4)
+//         htmlTableCellElement1.appendChild(htmlInputElement42)
+//         htmlTableCellElement1.appendChild(htmlInputElement01)
+//         htmlTableCellElement1.appendChild(htmlInputElement0)
+//         htmlTableCellElement1.appendChild(htmlInputElement1)
+//         htmlTableCellElement1.appendChild(htmlInputElement2)
+//
+//         htmlTableRowElement.appendChild(htmlTableCellElement1)
+//         htmlTableCellElement1.colSpan = 7
+//         htmlTableCellElement1.className = "add4btn"
+//         htmlTableCellElement1.style.textAlign = "center"
+//         $("#tbd").append(htmlTableRowElement)
+//     }
+//
+//     $("input[type='text']").css('width', '100px');
+//
+// }
 
-    // a.disabled = true
-    $("#trbtn").hide()
-    var attr1 = document.createElement("tr");
-    attr1.className = "add4btn"
-    let b = a.parentNode.colSpan;
-    for (let i = 0; i < b; i++) {
-        // alert(i)
-        var htmlTableCellElement = document.createElement("td");
-        var attr = document.createElement("input");
-
-        if (main) {
-
-            switch (i) {
-                case 1: {
-                    attr.type = 'text';
-
-                    attr.id = "price";
-                    break;
-                }
-                case 0: {
-                    attr.type = 'text';
-
-                    attr.hidden = true;
-                    break;
-                }
-                case 2: {
-                    attr.type = 'date';
-                    attr.name = 'date';
-                    attr.id = "dateadd"
-                    break;
-                }
-                case 3: {
-                    attr.type = 'text';
-                    attr.hidden = true;
-                    attr.id = "commentadd"
-
-                    break;
-                }
-
-            }
-
-
-        } else {
-
-
-            switch (i) {
-                case 1: {
-                    attr.type = 'text';
-                    attr.id = "nameB";
-                    break;
-                }
-                case 0: {
-                    attr.type = 'text';
-
-                    attr.hidden = true;
-                    break;
-                }
-                case 3: {
-                    attr.type = 'date';
-                    attr.name = 'date';
-                    attr.id = 'dateB';
-                    break;
-                }
-                case 2: {
-                    attr.type = 'text';
-
-                    attr.id = "priceB"
-                    break;
-                }
-                case 5: {
-                    attr.type = 'date';
-                    attr.name = 'countTo';
-                    attr.id = 'countToB';
-                    break;
-                }
-                case 4: {
-                    attr.type = 'text';
-
-                    // attr.type = 'date';
-                    attr.name = 'comment';
-                    attr.id = 'commentB';
-                    break;
-
-                }
-
-            }
-
-        }
-
-        if (i === b - 1) {
-            attr.type = 'button';
-            attr.value = "提交"
-            attr.onclick = function () {
-
-                addsubmit(this)
-
-            }
-        }
-
-
-        htmlTableCellElement.appendChild(attr);
-        attr1.appendChild(htmlTableCellElement)
-
-    }
-    $("#tbd").append(attr1);
-    if (!main) {
-        var htmlInputElement01 = document.createElement("span");
-        htmlInputElement01.innerHTML = "快捷备注:"
-
-        var htmlInputElement0 = document.createElement("input");
-        htmlInputElement0.type = 'button'
-        htmlInputElement0.value = "买菜"
-        fastbtn($(htmlInputElement0))
-        htmlInputElement0.style.background = "green"
-
-
-        var htmlInputElement1 = document.createElement("input");
-        htmlInputElement1.type = 'button'
-        htmlInputElement1.value = "超市购物"
-        htmlInputElement1.style.background = "orange"
-        fastbtn($(htmlInputElement1))
-        var htmlInputElement2 = document.createElement("input");
-        htmlInputElement2.type = 'button'
-        htmlInputElement2.value = "羊毛"
-        htmlInputElement2.style.background = "pink"
-        fastbtn($(htmlInputElement2))
-        var htmlInputElement3 = document.createElement("input");
-        htmlInputElement3.type = 'checkbox'
-        htmlInputElement3.name = "shouru"
-        htmlInputElement3.id = "shouru"
-        var htmlInputElement42 = document.createElement("br");
-        var htmlInputElement4 = document.createElement("span");
-        htmlInputElement4.innerHTML = "计做收入"
-
-
-        var htmlTableRowElement = document.createElement("tr");
-        var htmlTableCellElement1 = document.createElement("td");
-        htmlTableCellElement1.appendChild(htmlInputElement3)
-
-        htmlTableCellElement1.appendChild(htmlInputElement4)
-        htmlTableCellElement1.appendChild(htmlInputElement42)
-        htmlTableCellElement1.appendChild(htmlInputElement01)
-        htmlTableCellElement1.appendChild(htmlInputElement0)
-        htmlTableCellElement1.appendChild(htmlInputElement1)
-        htmlTableCellElement1.appendChild(htmlInputElement2)
-
-        htmlTableRowElement.appendChild(htmlTableCellElement1)
-        htmlTableCellElement1.colSpan = 7
-        htmlTableCellElement1.className = "add4btn"
-        htmlTableCellElement1.style.textAlign = "center"
-        $("#tbd").append(htmlTableRowElement)
-    }
-
-    $("input[type='text']").css('width', '100px');
-
-}
-
-let addsubmit = function (a) {
-
-
-    if (main) {
-        $.ajax({
-            url: "${pageContext.request.contextPath}/day/insert",
-            type: "post",
-            data: {
-                "price": $("#price").val(),
-                "date": $("#dateadd").val(),
-                "comment": $("#commentadd").val()
-            }, success: function (a0) {
-                // alert(a0.code)
-                if (a0.code === "200") {
-                    alert("成功")
-                    reload()
-
-                    window.location.href = "list.jsp"
-
-                }
-            }, error: function () {
-                alert("主表日期不允许重复  操作失败")
-            }
-        })
-    } else {/*副表*/
-        if ($("#shouru").prop("checked") && !($("#priceB").val().startsWith("-"))) {
-            let a = $("#priceB").val()
-            $("#priceB").val("-" + a)
-        }
-
-        if (($("#priceB").val().startsWith("-")) && (!$("#shouru").prop('checked'))) {
-            alert("价格负值必须计做收入!")
-
-        } else {
-
-
-            $.ajax({
-                url: "${pageContext.request.contextPath}/monthly/insert",
-                type: "post",
-                data: {
-                    "price": $("#priceB").val(),
-                    "date": $("#dateB").val(),
-                    "comment": $("#commentB").val(),
-                    "name": $("#nameB").val(),
-                    "countTo": $("#countToB").val()
-                }, success: function (a0) {
-                    // alert(a0.code)
-                    if (a0.code === "200") {
-                        alert("成功")
-
-                        reload()
-                        $(".add4btn").remove();
-                        $("#trbtn").show()
-                        $("#addbtn").show()
-                    }
-                }, error: function () {
-                    alert("失败! 时间不允许为空,\n计入月份为空将默认与时间相同!")
-
-                }
-            })
-        }
-    }
-}
+// let addsubmit = function (a) {
+//
+//
+//
+//     if (main) {
+//         $.ajax({
+//             url: "${pageContext.request.contextPath}/day/insert",
+//             type: "post",
+//             data: {
+//                 "price": $("#price").val(),
+//                 "date": $("#dateadd").val(),
+//                 "comment": $("#commentadd").val()
+//             }, success: function (a0) {
+//                 // alert(a0.code)
+//                 if (a0.code === "200") {
+//                     alert("成功")
+//                     reload()
+//
+//                     window.location.href = "list.jsp"
+//
+//                 }
+//             }, error: function () {
+//                 alert("主表日期不允许重复  操作失败")
+//             }
+//         })
+//     } else {/*副表*/
+//         if ($("#shouru").prop("checked") && !($("#priceB").val().startsWith("-"))) {
+//             let a = $("#priceB").val()
+//             $("#priceB").val("-" + a)
+//         }
+//
+//         if (($("#priceB").val().startsWith("-")) && (!$("#shouru").prop('checked'))) {
+//             alert("价格负值必须计做收入!")
+//
+//         } else {
+//
+//
+//             $.ajax({
+//                 url: "${pageContext.request.contextPath}/monthly/insert",
+//                 type: "post",
+//                 data: {
+//                     "price": $("#priceB").val(),
+//                     "date": $("#dateB").val(),
+//                     "comment": $("#commentB").val(),
+//                     "name": $("#nameB").val(),
+//                     "countTo": $("#countToB").val()
+//                 }, success: function (a0) {
+//                     // alert(a0.code)
+//                     if (a0.code === "200") {
+//                         alert("成功")
+//
+//                         reload()
+//                         $(".add4btn").remove();
+//                         $("#trbtn").show()
+//                         $("#addbtn").show()
+//                     }
+//                 }, error: function () {
+//                     alert("失败! 时间不允许为空,\n计入月份为空将默认与时间相同!")
+//
+//                 }
+//             })
+//         }
+//     }
+// }
 
 let fastbtn = function (btn) {
     // alert($(btn).val())
@@ -636,7 +642,6 @@ let fastbtn = function (btn) {
 
 
 }
-
 
 
 let func = function () {

@@ -19,7 +19,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.118.2">
-    <title>个人收支管理系统·猫小咪软件</title>
+    <title>个人收支管理系统·猫小咪软件 V2.0</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
 
@@ -528,8 +528,9 @@
     </form>
     <%--        </body>--%>
     <script src="${pageContext.request.contextPath}/js/adder.js"></script>
-    <script>let addsubmit = function (a) {
-
+    <script>
+        let addsubmit = function (a) {
+        $(a).off("keydown");
 
         if (main) {
             $.ajax({
@@ -773,7 +774,14 @@
                 $(".modify").attr("disabled", "disabled")
                 $(lst[5]).css("color", "red")
                 $(lst[5]).off("click")
+                $(document).on("keydown", function (event) {
+                    if (event.key === "Enter") {
+                        $(lst[5]).click(); // 触发按钮点击
+                    }
+                });
                 $(lst[5]).click(update)
+
+
                 $("#commentupd").attr("disabled", "disabled")
 
 
@@ -800,13 +808,18 @@
                 $(".modify").attr("disabled", "disabled")
                 $(lst[8]).css("color", "red")
                 $(lst[8]).off("click")
+                $(document).on("keydown", function (event) {
+                    if (event.key === "Enter") {
+                        $(lst[8]).click(); // 触发按钮点击
+                    }
+                });
                 $(lst[8]).click(function () {
                     update(1)
                 })
             }
         }
         let update = function (a) {
-
+            $(document).off("keydown");
             if (main) {
                 $.ajax({
                     url: "${pageContext.request.contextPath}/day/update",

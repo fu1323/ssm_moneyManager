@@ -7,12 +7,7 @@
 <%--<%@include file="top.jsp"%>--%>
 <%--<%@include file="goldku.jsp"%>&lt;%&ndash;&ndash;%&gt;--%>
 <%
-
-
-
         response.sendRedirect(request.getContextPath()+"/list.jsp");
-
-
 %>
 <body>
 <h1>

@@ -93,9 +93,18 @@ let adder = function (a) {
         if (i === b - 1) {
             attr.type = 'button';
             attr.value = "提交"
+            let a = attr;
+            $(document).on("keydown", function (event) {
+                if (event.key === "Enter") {
+                    $(a).click(); // 触发按钮点击
+                }
+            });
             attr.onclick = function () {
 
+                $(document).off("keydown");
+
                 addsubmit(this)
+
 
             }
         }
