@@ -1,6 +1,7 @@
 package xin.chunming.moneymanager.pojo;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import xin.chunming.moneymanager.pojo.login.user;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -15,6 +16,7 @@ public class monthly {
     private  Date countTo;
     private long conbinationId;
     private String price;
+    private user u;
 
     public String getPrice() {
         return price;
@@ -22,6 +24,20 @@ public class monthly {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public user getU() {
+        return u;
+    }
+
+    public void setU(user u) {
+        this.u = u;
     }
 
     @Override
@@ -33,9 +49,13 @@ public class monthly {
                 ", comment='" + comment + '\'' +
                 ", countTo=" + countTo +
                 ", conbinationId=" + conbinationId +
-                ", price=" + price +
+                ", price='" + price + '\'' +
+                ", u=" + u +
                 '}';
     }
+
+
+
 
     public int getId() {
         return id;

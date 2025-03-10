@@ -15,7 +15,7 @@ import java.util.List;
 public class loginService {
     @Autowired
     private loginMapper lm;
-
+private List<user> users;
     public boolean login(user u, HttpServletRequest hsr) {
         String ipadderss = hsr.getRemoteAddr();
 
@@ -28,7 +28,7 @@ public class loginService {
         for (loginlog loginlog : querylog) {
             System.out.println(loginlog);
         }
-        List<user> users = lm.queryUser(u);
+        users = lm.queryUser(u);
 
 
         System.out.println(querylog.size());
@@ -36,7 +36,7 @@ public class loginService {
             throw new loginfailException("您已被永久封锁");
         } else {
             if (!users.isEmpty()) {
-                hsr.getSession().setAttribute("user", u);
+                hsr.getSession().setAttribute("user", users.get(0));
 //                lg.setSuccess(true);
 //                lg.setName(u.getName());
 

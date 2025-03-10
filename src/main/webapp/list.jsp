@@ -6,20 +6,20 @@
 <html lang="zh-CN">
 <head>
     <%--    <script src="js/color-modes.js"></script>--%>
-        <%
-            if (request.getSession().getAttribute("user") == null) {
+    <%
+        if (request.getSession().getAttribute("user") == null) {
 
 
-                response.sendRedirect(request.getContextPath()+"/login.jsp");
-            }
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+        }
 
-        %>
+    %>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.118.2">
-    <title>个人收支管理系统·猫小咪软件 V2.0</title>
+    <title>个人收支管理系统·猫小咪软件 V3.0</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
 
@@ -105,6 +105,24 @@
 </svg>
 
 <script>
+    $(function () {
+        $("#exit").click(function () {
+            let s = confirm("确认退出 用户${user.name}?");
+            if (s) {
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/exit",
+                    type: "get",
+                    success: function () {
+                        window.location.reload(true)
+                    }
+                })
+            }
+        })
+    })
+
+
+
+
     let main = true;/*主副标志*/
     let month;
     let year;
@@ -113,6 +131,7 @@
     let isDragging = false;
     let offsetX, offsetY;
     let dom = function (b) {
+
         $("#fu").click(function (a) {
             fu(a)
         })
@@ -252,6 +271,19 @@
         }
     }
     $(function () {
+
+
+
+        $("#up").click(function () {
+
+            window.location="${pageContext.request.contextPath}/upload.jsp";
+        })
+
+
+
+
+
+
             $("#clr").click(clear)
             draggable = document.getElementById("draggable");
             $("#fu").click(function () {
@@ -307,14 +339,14 @@
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/list.jsp" class="nav-link active"
                                         aria-current="page" id="mainp">主表</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" <%--onclick="fu(this)"--%> id="fu">副表</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">调整月份(日期随意)</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" id="up" style="font-size: small">调整月份(日期随意)</a></li>
 
             </ul>
             <input type="date" id="da" name="da" style="display: inline-block">
             <input type="button" id="dateok" value="提交" name="dateok" style="display: inline-block"
                    onclick="set(this)">
             <input type="button" value="清除" id="clr" name="123">
-
+            <input type="button" value="退出系统" id="exit" style="color: crimson" name="12e3">
         </header>
         <script>
             let clear = function () {
@@ -530,82 +562,82 @@
     <script src="${pageContext.request.contextPath}/js/adder.js"></script>
     <script>
         let addsubmit = function (a) {
-        $(a).off("keydown");
+            $(a).off("keydown");
 
-        if (main) {
-            $.ajax({
-                url: "${pageContext.request.contextPath}/day/insert",
-                type: "post",
-                data: {
-                    "price": $("#price").val(),
-                    "date": $("#dateadd").val(),
-                    "comment": $("#commentadd").val()
-                }, success: function (a0) {
-                    // alert(a0.code)
-                    if (a0.code === "200") {
-                        alert("成功")
-                        reload()
-
-                        window.location.href = "list.jsp"
-/*error: function (jqxhr,status,err) {
-
-                        if ((JSON.parse(jqxhr.responseText)).message !== undefined) {
-                            alert((JSON.parse(jqxhr.responseText)).message)
-                        } else alert("主表日期不允许重复  操作失败")*/
-                    }
-                }, error:function (jqxhr,status,err) {
-                    if ((JSON.parse(jqxhr.responseText)).message !== undefined) {
-                        alert((JSON.parse(jqxhr.responseText)).message)
-                    } else alert("主表日期不允许重复  操作失败")
-                }
-            })
-        } else {/*副表*/
-            if ($("#shouru").prop("checked") && !($("#priceB").val().startsWith("-"))) {
-                let a = $("#priceB").val()
-                $("#priceB").val("-" + a)
-            }
-
-            if (($("#priceB").val().startsWith("-")) && (!$("#shouru").prop('checked'))) {
-                alert("价格负值必须计做收入!")
-
-            } else {
-
-
+            if (main) {
                 $.ajax({
-                    url: "${pageContext.request.contextPath}/monthly/insert",
+                    url: "${pageContext.request.contextPath}/day/insert",
                     type: "post",
                     data: {
-                        "price": $("#priceB").val(),
-                        "date": $("#dateB").val(),
-                        "comment": $("#commentB").val(),
-                        "name": $("#nameB").val(),
-                        "countTo": $("#countToB").val()
+                        "price": $("#price").val(),
+                        "date": $("#dateadd").val(),
+                        "comment": $("#commentadd").val()
                     }, success: function (a0) {
                         // alert(a0.code)
                         if (a0.code === "200") {
                             alert("成功")
-
                             reload()
-                            $(".add4btn").remove();
-                            $("#trbtn").show()
-                            $("#addbtn").show()
-                        }
-                    }, error: function (jqxhr,status,err) {
 
-                        if ((JSON.parse(jqxhr.responseText)).message !== undefined) {
-                            alert((JSON.parse(jqxhr.responseText)).message)
-                        }
-/* error: function (jqxhr,status,err) {
+                            window.location.href = "list.jsp"
+                            /*error: function (jqxhr,status,err) {
 
+                                                    if ((JSON.parse(jqxhr.responseText)).message !== undefined) {
+                                                        alert((JSON.parse(jqxhr.responseText)).message)
+                                                    } else alert("主表日期不允许重复  操作失败")*/
+                        }
+                    }, error: function (jqxhr, status, err) {
                         if ((JSON.parse(jqxhr.responseText)).message !== undefined) {
                             alert((JSON.parse(jqxhr.responseText)).message)
                         } else alert("主表日期不允许重复  操作失败")
-                    }*/
                     }
                 })
+            } else {/*副表*/
+                if ($("#shouru").prop("checked") && !($("#priceB").val().startsWith("-"))) {
+                    let a = $("#priceB").val()
+                    $("#priceB").val("-" + a)
+                }
+
+                if (($("#priceB").val().startsWith("-")) && (!$("#shouru").prop('checked'))) {
+                    alert("价格负值必须计做收入!")
+
+                } else {
+
+
+                    $.ajax({
+                        url: "${pageContext.request.contextPath}/monthly/insert",
+                        type: "post",
+                        data: {
+                            "price": $("#priceB").val(),
+                            "date": $("#dateB").val(),
+                            "comment": $("#commentB").val(),
+                            "name": $("#nameB").val(),
+                            "countTo": $("#countToB").val()
+                        }, success: function (a0) {
+                            // alert(a0.code)
+                            if (a0.code === "200") {
+                                alert("成功")
+
+                                reload()
+                                $(".add4btn").remove();
+                                $("#trbtn").show()
+                                $("#addbtn").show()
+                            }
+                        }, error: function (jqxhr, status, err) {
+
+                            if ((JSON.parse(jqxhr.responseText)).message !== undefined) {
+                                alert((JSON.parse(jqxhr.responseText)).message)
+                            }
+                            /* error: function (jqxhr,status,err) {
+
+                                                    if ((JSON.parse(jqxhr.responseText)).message !== undefined) {
+                                                        alert((JSON.parse(jqxhr.responseText)).message)
+                                                    } else alert("主表日期不允许重复  操作失败")
+                                                }*/
+                        }
+                    })
+                }
             }
-        }
-    }</script>
+        }</script>
     <script>
         let fastbtn = function (btn) {
             // alert($(btn).val())
@@ -834,7 +866,7 @@
                             alert("成功")
                             reload()
                         }
-                    }, error: function (jqxhr,status,err) {
+                    }, error: function (jqxhr, status, err) {
 
                         if ((JSON.parse(jqxhr.responseText)).message !== undefined) {
                             alert((JSON.parse(jqxhr.responseText)).message)
@@ -863,10 +895,10 @@
                             alert((JSON.parse(jqxhr.responseText)).message)
                         } else alert("主表日期不允许重复  操作失败")*/
 
-                    }, error: function (jqxhr,status,err) {
+                    }, error: function (jqxhr, status, err) {
                         if ((JSON.parse(jqxhr.responseText)).message !== undefined) {
                             alert((JSON.parse(jqxhr.responseText)).message)
-                        }  else alert("操作失败")
+                        } else alert("操作失败")
                     }
                 })
             }

@@ -1,5 +1,7 @@
 package xin.chunming.moneymanager.pojo;
 
+import xin.chunming.moneymanager.pojo.login.user;
+
 public class monthlyAll {
     private Integer id;
     private int month;
@@ -17,7 +19,7 @@ public class monthlyAll {
 
     private double allMoney;
     private double yu_e;
-
+    private user u;
 
 
     @Override
@@ -30,11 +32,17 @@ public class monthlyAll {
                 ", allKaizhi=" + allKaizhi +
                 ", allMoney=" + allMoney +
                 ", yu_e=" + yu_e +
+                ", u=" + u +
                 '}';
     }
 
+    public user getU() {
+        return u;
+    }
 
-
+    public void setU(user u) {
+        this.u = u;
+    }
 
     public monthlyAll() {
     }

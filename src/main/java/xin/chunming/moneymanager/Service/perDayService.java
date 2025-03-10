@@ -6,6 +6,7 @@ import xin.chunming.moneymanager.Dao.monthlyCrud;
 import xin.chunming.moneymanager.Dao.perDayCrud;
 import xin.chunming.moneymanager.exception.convertException;
 import xin.chunming.moneymanager.pojo.Allmoneies;
+import xin.chunming.moneymanager.pojo.login.user;
 import xin.chunming.moneymanager.pojo.perDay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,30 +24,30 @@ public class perDayService {
     @Autowired
     private monthlyAllDao mc;
 
-    public List<perDay> listDay(int month, int year) {
-        List<Allmoneies> allmoneies1 = ag.queryAuto(year, month);
+    public List<perDay> listDay(int month, int year,user u) {
+        List<Allmoneies> allmoneies1 = ag.queryAuto(year, month,u);
 
         if (allmoneies1.isEmpty()) {
-            String s = String.valueOf(mc.countAuto(month, year));
+            String s = String.valueOf(mc.countAuto(month, year,u));
             if (s != null && !s.equals("null")) {
                 Allmoneies allmoneies = new Allmoneies();
-                allmoneies.setPrice(String.valueOf(mc.countAuto(month, year)));
+                allmoneies.setPrice(String.valueOf(mc.countAuto(month, year,u)));
                 allmoneies.setName(year + "年" + month + "月" + "结余");
                 allmoneies.setComment("系统自动计算");
                 allmoneies.setDate(new Date(year - 1900, month - 1, 01));
-                System.out.println(mc.countAuto(month, year));
+                System.out.println(mc.countAuto(month, year,u));
                 System.out.println(allmoneies);
 
                 ag.insertAuto(allmoneies);
             }
         } else {
-            if (mc.countAuto(month, year) != null) {
-                allmoneies1.get(0).setPrice(String.valueOf(mc.countAuto(month, year)));
+            if (mc.countAuto(month, year,u) != null) {
+                allmoneies1.get(0).setPrice(String.valueOf(mc.countAuto(month, year,u)));
                 ag.insertAuto(allmoneies1.get(0));
             }
         }
 
-        List<perDay> lim = pdc.findPerDay(month, year);
+        List<perDay> lim = pdc.findPerDay(month, year,u);
         return lim;
     }
 
@@ -79,8 +80,8 @@ public class perDayService {
         }
     }
 
-    public void delete(int id) {
-        pdc.delete(id);
+    public void delete(int id,user u) {
+        pdc.delete(id,u);
     }
 
 }

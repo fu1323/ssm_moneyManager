@@ -6,6 +6,7 @@ import xin.chunming.moneymanager.Dao.AllmoneyGoldkucrud;
 import xin.chunming.moneymanager.exception.DataNotEditableException;
 import xin.chunming.moneymanager.exception.convertException;
 import xin.chunming.moneymanager.pojo.Allmoneies;
+import xin.chunming.moneymanager.pojo.login.user;
 import xin.chunming.moneymanager.tools.ExpressionEvaluator;
 
 import java.util.List;
@@ -16,12 +17,12 @@ public class AllmoneyGold {
     @Autowired
     private AllmoneyGoldkucrud gold;
 
-    public List<Allmoneies> queryAll() {
-        return gold.queryAll();
+    public List<Allmoneies> queryAll(user u) {
+        return gold.queryAll(u);
     }
 
-    public void delete(int id) {
-        gold.delete(id);
+    public void delete(int id,user u) {
+        gold.delete(id,u);
     }
 
     public void insert(Allmoneies am) throws convertException {
@@ -42,7 +43,7 @@ public class AllmoneyGold {
 
         try {
             double caculate = ExpressionEvaluator.caculate(am.getPrice());
-            if (gold.queryEditable(am.getId())) {
+            if (gold.queryEditable(am.getId(),am.getU())) {
                 am.setPrice(String.valueOf(caculate));
                 gold.update(am);
             } else throw new DataNotEditableException("该数据不可修改");
@@ -55,7 +56,7 @@ public class AllmoneyGold {
 
     }
 
-    public int selectallprice() {
-        return gold.allprice();
+    public int selectallprice(user u) {
+        return gold.allprice(u);
     }
 }

@@ -6,6 +6,7 @@ import xin.chunming.moneymanager.Dao.monthlyCrud;
 import xin.chunming.moneymanager.exception.NullDateException;
 import xin.chunming.moneymanager.exception.convertException;
 import xin.chunming.moneymanager.pojo.Allmoneies;
+import xin.chunming.moneymanager.pojo.login.user;
 import xin.chunming.moneymanager.pojo.monthly;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,11 +24,11 @@ public class monthlyService {
     @Autowired
     private monthlyAllDao mc;
 
-    public List<monthly> monthlyQuery(int month, int year) {
-        List<Allmoneies> allmoneies1 = ag.queryAuto(year, month);
+    public List<monthly> monthlyQuery(int month, int year, user u) {
+        List<Allmoneies> allmoneies1 = ag.queryAuto(year, month,u);
 
         if (allmoneies1.isEmpty()) {
-            String s = String.valueOf(mc.countAuto(month, year));
+            String s = String.valueOf(mc.countAuto(month, year,u));
 
             if (s!=null&&!s.equals("null")) {
                 Allmoneies allmoneies = new Allmoneies();
@@ -35,22 +36,22 @@ public class monthlyService {
                 allmoneies.setName(year + "年" + month + "月" + "结余");
                 allmoneies.setComment("系统自动计算");
                 allmoneies.setDate(new Date(year - 1900, month - 1, 01));
-                System.out.println(mc.countAuto(month, year));
+                System.out.println(mc.countAuto(month, year,u));
                 System.out.println(allmoneies);
 
                 ag.insertAuto(allmoneies);
             }
         } else {
-            allmoneies1.get(0).setPrice(String.valueOf(mc.countAuto(month, year)));
+            allmoneies1.get(0).setPrice(String.valueOf(mc.countAuto(month, year,u)));
             ag.insertAuto(allmoneies1.get(0));
         }
 
 
-        return mcf.findAllMonthly(month, year);
+        return mcf.findAllMonthly(month, year,u);
     }
 
-    public List<monthly> monthlyQueryByprice(int month, int year) {
-        return mcf.findAllMonthlybyPrice(month, year);
+    public List<monthly> monthlyQueryByprice(int month, int year,user u) {
+        return mcf.findAllMonthlybyPrice(month, year,u);
     }
 
     public void monthlyInsert(monthly m) throws convertException {
@@ -95,7 +96,7 @@ public class monthlyService {
 
     }
 
-    public void monthlyDelete(int id) {
-        mcf.delete(id);
+    public void monthlyDelete(int id,user u) {
+        mcf.delete(id,u);
     }
 }

@@ -19,6 +19,9 @@ http://www.springframework.org/schema/context/spring-context.xsd">
         <!--        <property name="prefix" value="/WEB-INF/pages/"></property>-->
         <property name="suffix" value=".jsp"/>
     </bean>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+
+    </bean>
     <!--开发静态资源访问权限-->
 
 

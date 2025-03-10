@@ -2,6 +2,7 @@ package xin.chunming.moneymanager.Controller;
 
 import jakarta.servlet.http.HttpSession;
 import xin.chunming.moneymanager.exception.convertException;
+import xin.chunming.moneymanager.pojo.login.user;
 import xin.chunming.moneymanager.pojo.monthly;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class permonthCRUD {
     @ResponseBody
     public List<monthly> lim(Integer month, Integer year, HttpSession hs) {
         hs.setAttribute("monthyear",new monthyear(month,year));
-      return    monthlyService.monthlyQuery(month, year);
+      return    monthlyService.monthlyQuery(month, year,(user)hs.getAttribute("user"));
 
 
     }
@@ -30,29 +31,31 @@ public class permonthCRUD {
     @ResponseBody
     public List<monthly> querybyprice(Integer month, Integer year,HttpSession hs) {
         hs.setAttribute("monthyear",new monthyear(month,year));
-        return monthlyService.monthlyQueryByprice (month, year);
+        return monthlyService.monthlyQueryByprice (month, year,(user)hs.getAttribute("user"));
 //        return monthlies;
 
     }
 
     @RequestMapping(value = "/insert", produces = "application/json")
     @ResponseBody
-    public String insert(monthly m) throws convertException {
+    public String insert(monthly m,HttpSession hs) throws convertException {
+        m.setU((user)hs.getAttribute("user"));
         monthlyService.monthlyInsert(m);
 
         return "{\"code\":\"200\"}";
     }
     @RequestMapping(value = "/update", produces = "application/json")
     @ResponseBody
-    public String update(monthly m) throws convertException {
+    public String update(monthly m,HttpSession hs) throws convertException {
+        m.setU((user)hs.getAttribute("user"));
         monthlyService.monthlyUpdate(m);
 
         return "{\"code\":\"200\"}";
     }
     @RequestMapping(value = "/delete", produces = "application/json",method = RequestMethod.DELETE)
     @ResponseBody
-    public String delete(Integer id) {
-        monthlyService.monthlyDelete(id);
+    public String delete(Integer id,HttpSession hs) throws convertException {
+        monthlyService.monthlyDelete(id,(user)hs.getAttribute("user"));
 
         return "{\"code\":\"200\"}";
     }

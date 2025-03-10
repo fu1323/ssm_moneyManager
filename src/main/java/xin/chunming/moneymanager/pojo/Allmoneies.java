@@ -1,6 +1,7 @@
 package xin.chunming.moneymanager.pojo;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import xin.chunming.moneymanager.pojo.login.user;
 
 import java.util.Date;
 
@@ -12,7 +13,7 @@ public class Allmoneies {
     private Date date;
     private String comment;
     private String price;
-
+    private user u;
 
     @Override
     public String toString() {
@@ -22,9 +23,20 @@ public class Allmoneies {
                 ", editable=" + editable +
                 ", date=" + date +
                 ", comment='" + comment + '\'' +
-                ", price=" + price +
+                ", price='" + price + '\'' +
+                ", u=" + u +
                 '}';
     }
+
+    public user getU() {
+        return u;
+    }
+
+    public void setU(user u) {
+        this.u = u;
+    }
+
+
 
     public Integer getId() {
         return id;
