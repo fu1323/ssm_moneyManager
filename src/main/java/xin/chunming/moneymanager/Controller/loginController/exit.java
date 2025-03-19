@@ -11,13 +11,18 @@ import xin.chunming.moneymanager.pojo.login.user;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
+import java.util.Iterator;
 
 @Controller
 public class exit {
 
     @RequestMapping(value = "/exit")
     public void querylog(HttpServletRequest hsr, HttpServletResponse hsp) throws IOException {
-        hsr.getSession().removeAttribute("user");
+
+        Iterator<String> iterator = hsr.getSession().getAttributeNames().asIterator();
+        while (iterator.hasNext()) {
+            hsr.getSession().removeAttribute(iterator.next());
+        }
 
         hsp.sendRedirect("/login.jsp");
     }
