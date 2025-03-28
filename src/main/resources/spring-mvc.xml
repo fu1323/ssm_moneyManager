@@ -31,6 +31,7 @@ http://www.springframework.org/schema/context/spring-context.xsd">
             <mvc:exclude-mapping path="/tologin"/>
             <mvc:exclude-mapping path="/css/**"/>
             <mvc:exclude-mapping path="/js/**"/>
+            <mvc:exclude-mapping path="/util"/>
             <bean class="xin.chunming.moneymanager.intercepter.intecepter"/>
         </mvc:interceptor>
     </mvc:interceptors>
