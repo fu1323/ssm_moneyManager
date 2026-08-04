@@ -17,6 +17,13 @@
     <input type="file" name="file" />
     <button type="submit">上传文件</button>
 </form>
+
+    <button type="button" id="b">ovpn_Conf</button>
+
+
+
+
+
     <button type="button" id="a">返回</button>
 <script>$(function(){
 
@@ -24,6 +31,25 @@
         window.location.href="${pageContext.request.contextPath}/list.jsp"
 
     })
-})</script>
+
+     $("#b").click(function(){
+            var tmp = prompt("输入url:")
+
+                                                $.ajax({
+                                                    url: "/vpn",
+                                                    type: "post",
+                                                    data: {
+                                                        "url": tmp
+
+                                                    }, success: function (a0) {
+                                                        // alert(a0.code)
+                                                        if (a0.code === "200") {
+                                                            alert("成功")
+                                                            reload()
+                                                        }
+
+        }
+
+                          })})})</script>
 </body>
 </html>
