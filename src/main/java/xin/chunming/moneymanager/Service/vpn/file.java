@@ -40,6 +40,9 @@ public class file {
         String conf = stringBuilder.toString();
         conf=conf.replace("dev tun", "dev tun78");
        conf= conf.replace("\nclient\n", "\nclient\nroute-nopull\n");
+       if (!conf.contains("ping")||!conf.contains("ping-restart")){
+           conf=conf.replace("\nclient\n","\nclient\nping 10\nping-restart 60\n");
+       }
         BufferedWriter bufferedWriter1 = new BufferedWriter(new FileWriter(file + ".ovpn"));
         bufferedWriter1.write(conf);
         bufferedWriter1.flush();
